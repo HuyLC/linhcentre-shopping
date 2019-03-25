@@ -41,7 +41,7 @@ gem 'jquery-rails'
 # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
 gem 'rails_admin', '~> 1.3'
 gem 'rails_admin_rollincode', '~> 1.0'
-gem 'rails_admin_softwarebrothers_theme', :git => 'git@github.com:softwarebrothers/rails_admin_softwarebrothers_theme.git'
+gem 'rails_admin_softwarebrothers_theme', :git => 'https://github.com/SoftwareBrothers/rails_admin_softwarebrothers_theme.git'
 
 
 group :development, :test do
