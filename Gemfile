@@ -20,6 +20,11 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+# Upload file
+gem 'carrierwave', '~> 1.0'
+gem 'rmagick'
+gem 'ckeditor'
+gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -36,7 +41,6 @@ gem 'devise'
 # Bootstrap
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
-
 
 # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
 gem 'rails_admin', '~> 1.3'

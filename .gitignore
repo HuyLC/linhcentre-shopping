@@ -29,3 +29,4 @@ config/database.yml
 config/config.yml
 Gemfile.lock
 /public/assets/*
+/public/uploads/*
