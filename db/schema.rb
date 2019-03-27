@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_233453) do
+ActiveRecord::Schema.define(version: 2019_03_27_042600) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,13 +41,45 @@ ActiveRecord::Schema.define(version: 2019_03_26_233453) do
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
+  create_table "line_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.integer "quantity", default: 1
+    t.integer "total_price", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "order_date"
+    t.integer "ship_fee", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.integer "total_price", default: 0
+    t.integer "discount_percent", default: 0
+    t.integer "discount_price", default: 0
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "photo"
-    t.integer "wholesale_price"
-    t.integer "retail_price"
-    t.integer "amount"
+    t.integer "wholesale_price", default: 0
+    t.integer "retail_price", default: 0
+    t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,4 +97,8 @@ ActiveRecord::Schema.define(version: 2019_03_26_233453) do
     t.string "provide"
   end
 
+  add_foreign_key "line_items", "products"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "users"
 end

@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :orders, dependent: :destroy
   enum gender: %i[Nam Nữ]
 
 
+  %i[name phone].each do |e|
+    validates_presence_of e
+  end
+
+  validates :phone, uniqueness: true
+  
   def full_address
-    [self.address, self.ward, self.district, self.provide].compact.join(', ')
+    [address, ward, district, provide].compact.join(', ')
   end
 
   rails_admin do
@@ -19,9 +26,7 @@ class User < ApplicationRecord
       field :provide
       field :facebook_profile
     end
-  end
 
-  rails_admin do
     update do
       field :name
       field :gender
@@ -32,9 +37,7 @@ class User < ApplicationRecord
       field :provide
       field :facebook_profile
     end
-  end
 
-  rails_admin do
     list do
       field :name
       field :gender
@@ -45,9 +48,7 @@ class User < ApplicationRecord
       field :created_at
       field :updated_at
     end
-  end
 
-  rails_admin do
     show do
       field :name
       field :gender

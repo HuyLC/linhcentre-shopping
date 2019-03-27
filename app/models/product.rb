@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 class Product < ApplicationRecord
+  has_many :order_items, dependent: :destroy
   before_save :set_image_by_params_image
   mount_uploader :photo, ProductPhotoUploader
   attr_accessor :image_data
+
+  %i[retail_price].each do |e|
+    validates_presence_of e
+  end
 
   rails_admin do
     update do
@@ -12,7 +17,7 @@ class Product < ApplicationRecord
       field :description, :ck_editor
       field :wholesale_price
       field :retail_price
-      field :amount
+      field :quantity
     end
     create do
       field :name
@@ -20,7 +25,7 @@ class Product < ApplicationRecord
       field :description, :ck_editor
       field :wholesale_price
       field :retail_price
-      field :amount
+      field :quantity
     end
 
     show do
@@ -34,7 +39,7 @@ class Product < ApplicationRecord
       end
       field :wholesale_price
       field :retail_price
-      field :amount
+      field :quantity
       field :created_at
       field :updated_at
     end
@@ -44,7 +49,7 @@ class Product < ApplicationRecord
       field :photo
       field :wholesale_price
       field :retail_price
-      field :amount
+      field :quantity
       field :created_at
       field :updated_at
     end
