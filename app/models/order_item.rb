@@ -36,7 +36,13 @@ class OrderItem < ApplicationRecord
       field :quantity
       field :total_price
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
 
     list do
@@ -46,7 +52,13 @@ class OrderItem < ApplicationRecord
       field :quantity
       field :total_price
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
   end
   

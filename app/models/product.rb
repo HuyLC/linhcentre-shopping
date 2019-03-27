@@ -2,6 +2,8 @@
 
 class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
+  has_many :product_items, dependent: :destroy
+
   before_save :set_image_by_params_image
   before_save :set_titleize_for_name
   mount_uploader :photo, ProductPhotoUploader
@@ -42,7 +44,13 @@ class Product < ApplicationRecord
       field :retail_price
       field :quantity
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
     list do
       field :id
@@ -52,7 +60,13 @@ class Product < ApplicationRecord
       field :retail_price
       field :quantity
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
   end
 

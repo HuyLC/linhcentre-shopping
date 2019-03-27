@@ -27,6 +27,31 @@ RailsAdmin.config do |config|
   config.excluded_models << Ckeditor::AttachmentFile
   config.excluded_models << Ckeditor::Picture
 
+
+  config.model User do
+    navigation_label 'Common'
+  end
+
+  config.model Product do
+    navigation_label 'Common'
+  end
+
+  config.model Order do
+    navigation_label 'Common'
+  end
+
+  config.model GoodsReceipt do
+    navigation_label 'Common'
+  end
+
+  config.model ProductItem do
+    navigation_label 'Dont Care'
+  end
+
+  config.model OrderItem do
+    navigation_label 'Dont Care'
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -38,8 +63,8 @@ RailsAdmin.config do |config|
     delete
     show_in_app
 
-    # # With an audit adapter, you can add:
-    # history_index
-    # history_show
+    # With an audit adapter, you can add:
+    history_index
+    history_show
   end
 end

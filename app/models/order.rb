@@ -64,6 +64,9 @@ class Order < ApplicationRecord
       field :id
       field :user
       field :order_date
+      configure :order_date, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :status
       field :order_items
       field :ship_fee
@@ -72,13 +75,22 @@ class Order < ApplicationRecord
       field :order_date
       field :total_price
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
 
     list do
       field :id
       field :user
       field :order_date
+      configure :order_date, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :status
       field :order_items
       field :ship_fee
@@ -86,7 +98,13 @@ class Order < ApplicationRecord
       field :discount_price
       field :total_price
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
   end
 end

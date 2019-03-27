@@ -51,7 +51,13 @@ class User < ApplicationRecord
         end
       end
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
 
     show do
@@ -65,7 +71,13 @@ class User < ApplicationRecord
         end
       end
       field :created_at
+      configure :created_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
       field :updated_at
+      configure :updated_at, :datetime do
+        strftime_format '%d-%m-%Y %H:%M'
+      end
     end
   end
 
