@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   validates :phone, uniqueness: true
 
+  before_save :set_titleize_for_name
+
   def full_address
     [address, ward, district, provide].compact.join(', ')
   end
@@ -65,5 +67,14 @@ class User < ApplicationRecord
       field :created_at
       field :updated_at
     end
+  end
+
+  private
+
+  def set_titleize_for_name
+    self.address = address.titleize unless address.nil?
+    self.ward = ward.titleize unless ward.nil?
+    self.district = district.titleize unless district.nil?
+    self.provide = provide.titleize unless provide.nil?
   end
 end

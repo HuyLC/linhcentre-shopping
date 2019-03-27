@@ -63,6 +63,6 @@ class Product < ApplicationRecord
   end
 
   def set_titleize_for_name
-    self.name  = photo.titlelize
+    self.name  = name.titleize
   end
 end
