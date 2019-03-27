@@ -45,7 +45,7 @@ class User < ApplicationRecord
       field :provide
       field :facebook_profile do
         pretty_value do
-          %(<a href="#{value}">#{value}</a>).html_safe
+          %(<a href="#{value}" _target="blank">#{value}</a>).html_safe
         end
       end
       field :created_at
@@ -59,7 +59,7 @@ class User < ApplicationRecord
       field :phone
       field :facebook_profile do
         pretty_value do
-          %(<a href="#{value}">#{value}</a>).html_safe
+          %(<a href="#{value}" _target="blank">#{value}</a>).html_safe
         end
       end
       field :created_at
