@@ -3,6 +3,7 @@
 class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   before_save :set_image_by_params_image
+  before_save :set_titleize_for_name
   mount_uploader :photo, ProductPhotoUploader
   attr_accessor :image_data
 
@@ -59,5 +60,9 @@ class Product < ApplicationRecord
 
   def set_image_by_params_image
     self.photo = ConvertImage.new(image_data).convert unless image_data.nil?
+  end
+
+  def set_titleize_for_name
+    self.name  = photo.titlelize
   end
 end
