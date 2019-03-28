@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :product_items, dependent: :destroy
 
+  before_save :price_thousand
   before_save :set_image_by_params_image
   before_save :set_titleize_for_name
   mount_uploader :photo, ProductPhotoUploader
@@ -71,6 +72,11 @@ class Product < ApplicationRecord
   end
 
   private
+
+  def price_thousand
+    self.wholesale_price = wholesale_price * 1000
+    self.retail_price = retail_price * 1000
+  end
 
   def set_image_by_params_image
     self.photo = ConvertImage.new(image_data).convert unless image_data.nil?

@@ -6,8 +6,10 @@ class Order < ApplicationRecord
 
   enum status: %i[delivering delivered deleted]
   enum ship_method: %i[vnpost huy other]
+  
+  before_save :price_thousand
+  before_save :sum_total_price
 
-  before_create :sum_total_price
   after_create :subtract_quantity_when_create_order
   after_update :sum_quantity_when_status_deleted
 
@@ -15,14 +17,15 @@ class Order < ApplicationRecord
 
   def sum_total_price
     self.total_price = 0
+    return if order_items.size.zero?
     order_items.each do |e|
       self.total_price = total_price + e.total_price
     end
     self.total_price = total_price + ship_fee
 
-    self.total_price =  total_price - (total_price * discount_percent / 100) if discount_percent.present?
+    self.total_price =  total_price - (total_price * discount_percent / 100) unless discount_percent.zero?
 
-    self.total_price =  total_price - discount_price if discount_price.present?
+    self.total_price =  total_price - discount_price unless discount_price.zero?
   end
 
   def subtract_quantity_when_create_order
@@ -46,6 +49,12 @@ class Order < ApplicationRecord
       e.is_sum = true
       e.save
     end
+  end
+
+
+  def price_thousand
+    self.ship_fee = self.ship_fee * 1000
+    self.discount_price = self.discount_price * 1000
   end
 
   rails_admin do
