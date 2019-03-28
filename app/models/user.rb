@@ -40,6 +40,7 @@ class User < ApplicationRecord
     end
 
     list do
+      field :id
       field :name
       field :gender
       field :phone
@@ -61,6 +62,7 @@ class User < ApplicationRecord
     end
 
     show do
+      field :id
       field :name
       field :gender
       field :full_address

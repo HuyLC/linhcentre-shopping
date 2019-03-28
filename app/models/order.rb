@@ -128,11 +128,11 @@ class Order < ApplicationRecord
       end
       field :status
       field :order_items
+      field :total_price
       field :ship_fee
       field :ship_method
       field :discount_percent
       field :discount_price
-      field :total_price
       field :created_at
       configure :created_at, :datetime do
         strftime_format '%d-%m-%Y %H:%M'
