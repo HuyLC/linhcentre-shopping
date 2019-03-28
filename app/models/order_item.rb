@@ -67,5 +67,4 @@ class OrderItem < ApplicationRecord
   def sum_total_price
     self.total_price = quantity * product.retail_price
   end
-
 end

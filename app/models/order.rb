@@ -7,7 +7,6 @@ class Order < ApplicationRecord
   enum status: %i[delivering delivered deleted]
   enum ship_method: %i[vnpost huy other]
 
-  before_save :price_thousand
   before_save :sum_total_price
 
   after_update :subtract_quantity_when_create_order
@@ -49,11 +48,6 @@ class Order < ApplicationRecord
       e.is_sum = true
       e.save
     end
-  end
-
-  def price_thousand
-    self.ship_fee = ship_fee * 1000
-    self.discount_price = discount_price * 1000
   end
 
   rails_admin do
