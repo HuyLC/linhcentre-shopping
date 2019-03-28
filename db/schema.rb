@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_105211) do
+ActiveRecord::Schema.define(version: 2019_03_28_113509) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_105211) do
     t.integer "total_price", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_sum", default: false
+    t.boolean "is_substract", default: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_105211) do
     t.integer "total_price", default: 0
     t.integer "discount_percent", default: 0
     t.integer "discount_price", default: 0
+    t.integer "ship_method", default: 0
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -86,6 +89,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_105211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "goods_receipt_id"
+    t.boolean "is_sum", default: false
     t.index ["goods_receipt_id"], name: "index_product_items_on_goods_receipt_id"
     t.index ["product_id"], name: "index_product_items_on_product_id"
   end
